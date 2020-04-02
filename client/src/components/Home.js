@@ -1,4 +1,6 @@
 import React from 'react';
+import {connect} from 'react-redux';
+import {handleInputAction} from '../myaction/action'
 
 class Home extends React.Component{
   state={
@@ -59,8 +61,8 @@ class Home extends React.Component{
             <input 
               type="text"
               name="item"
-              value={this.state.text} 
-              onChange={(e)=>this.setState({text:e.target.value})}
+              value={this.props.text} 
+              onChange={(e)=>this.props.handleinput(e.target.value)}
                />
               <button type="submit" className="waves-effect waves-light btn">Add</button> 
           </form>
@@ -73,5 +75,17 @@ class Home extends React.Component{
   }
  
 }
+const mapStateToProps = (state)=>{
+  return {
+    text:state.text
+  }
+}
 
-export default Home;
+const mapDispatchToProps =(dispatch)=>{
+  return{
+    handleinput:(input)=>{dispatch(handleInputAction(input))}
+  }
+}
+
+
+export default connect(mapStateToProps,mapDispatchToProps)(Home);
