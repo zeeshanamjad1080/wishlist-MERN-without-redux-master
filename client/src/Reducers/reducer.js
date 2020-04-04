@@ -4,12 +4,17 @@ const iState={
 }
 
 const reducer = (state=iState,action) =>{
-if(action.type==='Update_Input'){
-    return{
-        ...state,text:action.payload
+
+    switch(action.type){
+        case 'Update_Input':    return{
+            ...state,text:action.payload
+        };
+        case 'Get_Wish':return{
+            ...state,
+            mywishes:action.payload
+        };
+        default: return state;
     }
-}
-        return state;
 }
 
 export default reducer;
